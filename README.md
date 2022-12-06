@@ -12,5 +12,5 @@ an image as soon as its data is received instead of waiting for the complete res
 The server is encoding the image in base64 format, and sending it to the client in chunks. The client displays an image as soon as it receives the
 data for that image. 
 
-## Reference
-[link](https://dropbox.tech/infrastructure/retrieving-thumbnails)
+
+[reference](https://dropbox.tech/infrastructure/retrieving-thumbnails).

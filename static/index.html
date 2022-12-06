@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>thumbnails</title>
+  </head>
+  <body>
+    <img
+      id="1"
+      src="https://via.placeholder.com/150"
+      alt="loading"
+      height="200px"
+    />
+    <img
+      id="2"
+      src="https://via.placeholder.com/150"
+      alt="loading"
+      height="200px"
+    />
+    <img
+      id="3"
+      src="https://via.placeholder.com/150"
+      alt="loading"
+      height="200px"
+    />
+    <img
+      id="4"
+      src="https://via.placeholder.com/150"
+      alt="loading"
+      height="200px"
+    />
+    <img
+      id="5"
+      src="https://via.placeholder.com/150"
+      alt="loading"
+      height="200px"
+    />
+    <img
+      id="6"
+      src="https://via.placeholder.com/150"
+      alt="loading"
+      height="200px"
+    />
+    <img
+      id="7"
+      src="https://via.placeholder.com/150"
+      alt="loading"
+      height="200px"
+    />
+    <img
+      id="8"
+      src="https://via.placeholder.com/150"
+      alt="loading"
+      height="200px"
+    />
+    <img
+      id="9"
+      src="https://via.placeholder.com/150"
+      alt="loading"
+      height="200px"
+    />
+    <img
+      id="10"
+      src="https://via.placeholder.com/150"
+      alt="loading"
+      height="200px"
+    />
+  </body>
+  <script>
+    async function loadImgs() {
+      const response = await fetch("/thumbnails");
+      const reader = response.body.getReader();
+      let done, value;
+      let i = 1;
+      let curObj = "";
+      while (!done) {
+        ({ value, done } = await reader.read());
+        if (done) {
+          break;
+        }
+        const res = new TextDecoder().decode(value);
+        try {
+          curObj += res;
+          const obj = JSON.parse(curObj);
+          document
+            .getElementById(`${obj.id}`)
+            .setAttribute("src", `data:image/jpg;base64, ${obj.data}`);
+          curObj = "";
+        } catch (error) {
+          console.log("recving...");
+        }
+      }
+    }
+    loadImgs();
+  </script>
+</html>
